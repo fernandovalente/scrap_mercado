@@ -1,7 +1,8 @@
 from default import open_and_returns_bs4_object, create_json_file
 
 
-urls = 'http://pesquisapramim.com.br/categoria/biscoitos-13'
+urls = ['http://www.pesquisapramim.com.br/categoria/frios-e-salames-5',
+		'http://pesquisapramim.com.br/categoria/biscoitos-13']
 
 
 def produtos(obj):
@@ -22,11 +23,11 @@ def produtos(obj):
 
     return list_produtos
 
-
-for page in range(1, 7):
-    try:
-        url = '{}/?Pag={}'.format(urls, page)
-        obj = open_and_returns_bs4_object(url)
-        produtos(obj)
-    except:
-        break
+for category_url in urls:
+	for page in range(1, 7):
+	    try:
+	        url = '{}/?Pag={}'.format(category_url, page)
+	        obj = open_and_returns_bs4_object(url)
+	        produtos(obj)
+	    except:
+	        break
